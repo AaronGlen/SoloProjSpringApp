@@ -16,7 +16,7 @@ public class HeroController {
     @Autowired
     private HeroRepository repository;
 
-    @RequestMapping(value = "heros", method = RequestMethod.GET)
+    @RequestMapping(value = "heroes", method = RequestMethod.GET)
     public List<Hero> listAllHeroes(){
         return repository.findAll();
     }
