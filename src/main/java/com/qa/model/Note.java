@@ -21,10 +21,10 @@ public class Note {
         this.id = id;
     }
 
-    public String getName() { return heroName; }
+    public String getHeroName() { return heroName; }
 
-    public void setName(String name) {
-        this.heroName = name;
+    public void setHeroName(String heroName) {
+        this.heroName = heroName;
     }
 
     public String getIssueOne() {
