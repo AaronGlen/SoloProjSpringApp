@@ -10,7 +10,8 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String name;
+    String heroName;
+    String issueOne;
     String description;
     public Long getId() {
         return id;
@@ -20,13 +21,17 @@ public class Note {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return heroName; }
 
     public void setName(String name) {
-        this.name = name;
+        this.heroName = name;
     }
+
+    public String getIssueOne() {
+        return issueOne;
+    }
+
+    public void setIssueOne(String issueOne) { this.issueOne = issueOne; }
 
     public String getDescription() {
         return description;

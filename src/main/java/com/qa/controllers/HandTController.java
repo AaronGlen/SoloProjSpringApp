@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin()
-public class NotesController {
+public class HandTController {
 
     @Autowired
     private HAndTRepository repository;
