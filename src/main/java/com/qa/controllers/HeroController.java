@@ -17,28 +17,29 @@ public class HeroController {
     private HeroRepository repository;
 
     @RequestMapping(value = "heros", method = RequestMethod.GET)
-    public List<Hero> listAllNotes(){
+    public List<Hero> listAllHeroes(){
         return repository.findAll();
     }
 
     @RequestMapping(value = "hero", method = RequestMethod.POST)
-    public Hero addNote(@RequestBody Hero hero){
+    public Hero addHero(@RequestBody Hero hero){
         return repository.saveAndFlush(hero);
     }
 
     @RequestMapping(value = "hero/{id}", method = RequestMethod.GET)
-    public Hero getNote(@PathVariable Long id){
+    public Hero getHero(@PathVariable Long id){
         return repository.findOne(id);
     }
+
     @RequestMapping(value = "hero/{id}", method = RequestMethod.DELETE)
-    public Hero deleteNote(@PathVariable Long id){
+    public Hero deleteHero(@PathVariable Long id){
         Hero existing = repository.findOne(id);
         repository.delete(existing);
         return existing;
     }
     @Transactional
     @RequestMapping(value = "hero/{id}", method = RequestMethod.PUT)
-    public Hero updateNote(@PathVariable Long id, @RequestBody Hero hero){
+    public Hero updateHero(@PathVariable Long id, @RequestBody Hero hero){
         Hero ex = repository.findOne(id);
         ex.setHero(hero);
         return  ex;

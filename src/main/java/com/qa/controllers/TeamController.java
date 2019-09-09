@@ -1,0 +1,47 @@
+package com.qa.controllers;
+
+
+import com.qa.model.Team;
+import com.qa.repository.TeamRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+
+@RestController
+@CrossOrigin()
+public class TeamController {
+    @Autowired
+    private TeamRepository repository;
+
+    @RequestMapping(value = "teams", method = RequestMethod.GET)
+    public List<Team> listAllTeams(){
+        return repository.findAll();
+    }
+
+    @RequestMapping(value = "team", method = RequestMethod.POST)
+    public Team addTeam(@RequestBody Team team){
+        return repository.saveAndFlush(team);
+    }
+
+    @RequestMapping(value = "team/{id}", method = RequestMethod.GET)
+    public Team getTeam(@PathVariable Long id){
+        return repository.findOne(id);
+    }
+
+    @RequestMapping(value = "team/{id}", method = RequestMethod.DELETE)
+    public Team deleteTeam(@PathVariable Long id){
+        Team existing = repository.findOne(id);
+        repository.delete(existing);
+        return existing;
+    }
+    @Transactional
+    @RequestMapping(value = "team/{id}", method = RequestMethod.PUT)
+    public Team updateTeam(@PathVariable Long id, @RequestBody Team team){
+        Team ex = repository.findOne(id);
+        ex.setTeam(team);
+        return  ex;
+    }
+}
