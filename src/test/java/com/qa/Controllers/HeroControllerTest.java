@@ -38,7 +38,7 @@ public class HeroControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void testGetAllNotes(){
+    public void testGetAllHeroes(){
         List<Hero> heroesList = new ArrayList<>();
         Hero hero = new Hero();
         hero.setDescription("blah");
@@ -50,6 +50,19 @@ public class HeroControllerTest {
 
         assertEquals(heroController.listAllHeroes().get(0).getHeroName(), "blah");
     }
+    @Test
+    public void testGetHero(){
+
+        Hero hero= new Hero();
+        hero.setDescription("blah");
+        hero.setHeroName("blake");
+        hero.setId(3l);
+
+
+        when(repository.findOne(3l)).thenReturn(hero);
+        assertEquals(heroController.getHero(3l).getHeroName(), "blake");
+    }
+
 
 
 }
