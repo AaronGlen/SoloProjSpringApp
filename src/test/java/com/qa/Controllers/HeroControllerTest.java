@@ -74,6 +74,21 @@ public class HeroControllerTest {
         assertEquals(heroController.addHero(hero).getHeroName(),"russo");
 
     }
+    @Test
+    public void testDeleteHero(){
+
+        Hero hero = new Hero();
+        hero.setDescription("bark");
+        hero.setHeroName("ruff");
+        hero.setId(7l);
+
+
+        when(repository.findOne(7l)).thenReturn(hero);
+        repository.delete(7l);
+        assertEquals( heroController.deleteHero(7l),hero);
+
+
+    }
 
 
 
