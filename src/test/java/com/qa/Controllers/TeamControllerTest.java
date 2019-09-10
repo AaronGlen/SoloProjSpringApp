@@ -42,13 +42,40 @@ public class TeamControllerTest {
         List<Team> teamsList = new ArrayList<>();
         Team team = new Team();
         team.setDescription("blah");
-        team.setTeamName("A");
+        team.setTeamName("A-force");
         team.setIssueOne("#1");
         teamsList.add(team);
 
         when(repository.findAll()).thenReturn(teamsList);
 
-        assertEquals(teamController.listAllTeams().get(0).getTeamName(), "A");
+        assertEquals(teamController.listAllTeams().get(0).getTeamName(), "A-force");
+    }
+
+    @Test
+    public void testGetTeam(){
+
+        Team team = new Team();
+        team.setDescription("blah");
+        team.setTeamName("X-men Gold");
+        team.setId(3l);
+
+
+        when(repository.findOne(3l)).thenReturn(team);
+        assertEquals(teamController.getTeam(3l).getTeamName(), "X-men Gold");
+    }
+
+    @Test
+    public void testAddTeam(){
+        Team team = new Team();
+        team.setDescription("blah");
+        team.setTeamName("X-men Blue");
+        team.setId(3l);
+
+
+
+        when(repository.saveAndFlush(team)).thenReturn(team);
+        assertEquals(teamController.addTeam(team).getTeamName(),"X-men Blue");
+
     }
 
 
