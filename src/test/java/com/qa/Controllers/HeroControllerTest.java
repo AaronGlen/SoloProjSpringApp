@@ -63,6 +63,19 @@ public class HeroControllerTest {
         assertEquals(heroController.getHero(3l).getHeroName(), "blake");
     }
 
+    @Test
+    public void testAddHero(){
+        Hero hero = new Hero();
+        hero.setDescription("bark");
+        hero.setHeroName("russo");
+        hero.setId(1l);
+
+        when(repository.saveAndFlush(hero)).thenReturn(hero);
+        assertEquals(heroController.addHero(hero).getHeroName(),"russo");
+
+    }
+
+
 
 
 }
