@@ -24,22 +24,22 @@ public class TeamController {
     private TeamRepository teamRepository;
 
     @RequestMapping(value = "teams", method = RequestMethod.GET)
-    public List<Team> listAllTeams(){
+    public List<Team> listAllTeams() {
         return teamRepository.findAll();
     }
 
     @RequestMapping(value = "team", method = RequestMethod.POST)
-    public Team addTeam(@RequestBody Team team){
+    public Team addTeam(@RequestBody Team team) {
         return teamRepository.saveAndFlush(team);
     }
 
     @RequestMapping(value = "team/{id}", method = RequestMethod.GET)
-    public Team getTeam(@PathVariable Long id){
+    public Team getTeam(@PathVariable Long id) {
         return teamRepository.findOne(id);
     }
 
     @RequestMapping(value = "team/{id}", method = RequestMethod.DELETE)
-    public Team deleteTeam(@PathVariable Long id){
+    public Team deleteTeam(@PathVariable Long id) {
         Team existing = teamRepository.findOne(id);
         teamRepository.delete(existing);
         return existing;
@@ -47,7 +47,7 @@ public class TeamController {
 
     @Transactional
     @RequestMapping(value = "team/{id}", method = RequestMethod.PUT)
-    public Team updateTeam(@PathVariable Long id, @RequestBody Team team){
+    public Team updateTeam(@PathVariable Long id, @RequestBody Team team) {
         Team ex = teamRepository.findOne(id);
         ex.setTeam(team);
         return ex;
