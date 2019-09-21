@@ -14,33 +14,33 @@ import java.util.List;
 public class HeroController {
 
     @Autowired
-    private HeroRepository repository;
+    private HeroRepository heroRepository;
 
     @RequestMapping(value = "heroes", method = RequestMethod.GET)
     public List<Hero> listAllHeroes(){
-        return repository.findAll();
+        return heroRepository.findAll();
     }
 
     @RequestMapping(value = "hero", method = RequestMethod.POST)
     public Hero addHero(@RequestBody Hero hero){
-        return repository.saveAndFlush(hero);
+        return heroRepository.saveAndFlush(hero);
     }
 
     @RequestMapping(value = "hero/{id}", method = RequestMethod.GET)
     public Hero getHero(@PathVariable Long id){
-        return repository.findOne(id);
+        return heroRepository.findOne(id);
     }
 
     @RequestMapping(value = "hero/{id}", method = RequestMethod.DELETE)
     public Hero deleteHero(@PathVariable Long id){
-        Hero existing = repository.findOne(id);
-        repository.delete(existing);
+        Hero existing = heroRepository.findOne(id);
+        heroRepository.delete(existing);
         return existing;
     }
     @Transactional
     @RequestMapping(value = "hero/{id}", method = RequestMethod.PUT)
     public Hero updateHero(@PathVariable Long id, @RequestBody Hero hero){
-        Hero ex = repository.findOne(id);
+        Hero ex = heroRepository.findOne(id);
         ex.setHero(hero);
         return  ex;
     }

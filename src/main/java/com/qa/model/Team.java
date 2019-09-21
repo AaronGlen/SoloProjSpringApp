@@ -1,9 +1,8 @@
 package com.qa.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Team {
@@ -14,6 +13,10 @@ public class Team {
     String teamName;
     String issueOne;
     String description;
+
+
+    @OneToMany(fetch = FetchType.EAGER)
+    Set<Hero> heroes = new HashSet<Hero>();
 
     public Team(){
         super();
@@ -63,5 +66,4 @@ public class Team {
         this.issueOne = team.issueOne;
         this.description = team.description;
     }
-
 }
