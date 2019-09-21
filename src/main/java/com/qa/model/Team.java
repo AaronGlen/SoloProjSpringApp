@@ -66,4 +66,12 @@ public class Team {
         this.issueOne = team.issueOne;
         this.description = team.description;
     }
+
+    public Set<Hero> getHero(){
+        return heroes;
+    }
+    public void setHero(Set<Hero> hero){
+     this.heroes =hero;
+    }
+
 }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -45,11 +44,18 @@ public class TeamController {
         return existing;
     }
 
-    @Transactional
-    @RequestMapping(value = "team/{id}", method = RequestMethod.PUT)
-    public Team updateTeam(@PathVariable Long id, @RequestBody Team team){
-        Team ex = teamRepository.findOne(id);
-        ex.setTeam(team);
-        return ex;
+    @RequestMapping(value = "team/{id}/{oldHeroId}/{newHeroId}", method = RequestMethod.PUT)
+    public Team updateTeam(@PathVariable Long id,@PathVariable Long oldHeroId,@PathVariable Long newHeroId){
+        Team returned = teamRepository.findOne(id);
+
+        Hero oldHero = heroRepository.findOne(oldHeroId);
+        Hero newHero = heroRepository.findOne(newHeroId);
+
+        Set<Hero> newTeam = returned.getHero();
+        newTeam.remove(oldHero);
+        newTeam.add(newHero);
+        returned.setHero(newTeam);
+        teamRepository.flush();
+        return  returned;
     }
 }
