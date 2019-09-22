@@ -81,8 +81,6 @@ public class HeroControllerTest {
         hero.setDescription("best hero");
         hero.setHeroName("captain cool");
         hero.setId(7l);
-
-
         when(repository.findOne(7l)).thenReturn(hero);
         repository.delete(7l);
         assertEquals( heroController.deleteHero(7l),hero);
