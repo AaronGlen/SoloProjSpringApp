@@ -41,7 +41,7 @@ public class TeamControllerTest {
     public void testGetAllTeams(){
         List<Team> teamsList = new ArrayList<>();
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("female super team");
         team.setTeamName("A-force");
         team.setIssueOne("#1");
         teamsList.add(team);
@@ -55,7 +55,7 @@ public class TeamControllerTest {
     public void testGetTeam(){
 
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("old x-men");
         team.setTeamName("X-men Gold");
         team.setId(3l);
 
@@ -67,7 +67,7 @@ public class TeamControllerTest {
     @Test
     public void testAddTeam(){
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("young x-men");
         team.setTeamName("X-men Blue");
         team.setId(3l);
 
@@ -75,7 +75,19 @@ public class TeamControllerTest {
 
         when(repository.saveAndFlush(team)).thenReturn(team);
         assertEquals(teamController.addTeam(team).getTeamName(),"X-men Blue");
+    }
+    @Test
+    public void testDeleteTeam(){
 
+        Team team = new Team();
+        team.setDescription("good team");
+        team.setTeamName("super pet squad");
+        team.setId(7l);
+
+
+        when(repository.findOne(7l)).thenReturn(team);
+        repository.delete(7l);
+        assertEquals( teamController.deleteTeam(7l),team);
     }
 
 
