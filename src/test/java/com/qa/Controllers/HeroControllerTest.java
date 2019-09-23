@@ -41,20 +41,20 @@ public class HeroControllerTest {
     public void testGetAllHeroes(){
         List<Hero> heroesList = new ArrayList<>();
         Hero hero = new Hero();
-        hero.setDescription("blah");
-        hero.setHeroName("blah");
+        hero.setDescription("good guy");
+        hero.setHeroName("hero");
         hero.setIssueOne("#1");
         heroesList.add(hero);
 
         when(repository.findAll()).thenReturn(heroesList);
 
-        assertEquals(heroController.listAllHeroes().get(0).getHeroName(), "blah");
+        assertEquals(heroController.listAllHeroes().get(0).getHeroName(), "hero");
     }
     @Test
     public void testGetHero(){
 
         Hero hero= new Hero();
-        hero.setDescription("blah");
+        hero.setDescription("okay guy");
         hero.setHeroName("blake");
         hero.setId(3l);
 
@@ -66,7 +66,7 @@ public class HeroControllerTest {
     @Test
     public void testAddHero(){
         Hero hero = new Hero();
-        hero.setDescription("bark");
+        hero.setDescription("director");
         hero.setHeroName("russo");
         hero.setId(1l);
 
@@ -78,16 +78,12 @@ public class HeroControllerTest {
     public void testDeleteHero(){
 
         Hero hero = new Hero();
-        hero.setDescription("bark");
-        hero.setHeroName("ruff");
+        hero.setDescription("best hero");
+        hero.setHeroName("captain cool");
         hero.setId(7l);
-
-
         when(repository.findOne(7l)).thenReturn(hero);
         repository.delete(7l);
         assertEquals( heroController.deleteHero(7l),hero);
-
-
     }
 
 
