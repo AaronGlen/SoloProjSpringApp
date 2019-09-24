@@ -89,6 +89,18 @@ public class TeamControllerTest {
         repository.delete(7l);
         assertEquals( teamController.deleteTeam(7l),team);
     }
+    @Test
+    public void testUpdateTeam(){
+
+        Team team= new Team();
+        team.setId(1L);
+        team.setTeamName("Avengers");
+        team.setDescription("worlds strongest heroes  ");
+
+        when(repository.findOne(1L)).thenReturn(team);
+        assertEquals(teamController.updateTeam(1L, team).getTeamName(), "Avengers");
+    }
+
 
 
 

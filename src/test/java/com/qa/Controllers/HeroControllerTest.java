@@ -8,10 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -31,11 +30,6 @@ public class HeroControllerTest {
     @Mock
     private HeroRepository repository;
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Test
     public void testGetAllHeroes(){
@@ -84,6 +78,17 @@ public class HeroControllerTest {
         when(repository.findOne(7l)).thenReturn(hero);
         repository.delete(7l);
         assertEquals( heroController.deleteHero(7l),hero);
+    }
+    @Test
+    public void testUpdateHero(){
+
+        Hero hero= new Hero();
+        hero.setId(1L);
+        hero.setHeroName("IronMan");
+        hero.setDescription("man of fe");
+
+        when(repository.findOne(1L)).thenReturn(hero);
+        assertEquals(heroController.updateHero(1L, hero).getHeroName(), "IronMan");
     }
 
 
