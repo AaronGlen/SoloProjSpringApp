@@ -1,7 +1,6 @@
-package com.qa.Controllers;
+package com.qa.controllers;
 
 
-import com.qa.controllers.TeamController;
 import com.qa.model.Team;
 import com.qa.repository.TeamRepository;
 import org.junit.Test;
@@ -31,11 +30,6 @@ public class TeamControllerTest {
     @Mock
     private TeamRepository repository;
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Test
     public void testGetAllTeams(){

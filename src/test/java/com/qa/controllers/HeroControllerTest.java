@@ -1,7 +1,6 @@
-package com.qa.Controllers;
+package com.qa.controllers;
 
 
-import com.qa.controllers.HeroController;
 import com.qa.model.Hero;
 import com.qa.repository.HeroRepository;
 import org.junit.Test;
