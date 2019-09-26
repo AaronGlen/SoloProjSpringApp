@@ -1,17 +1,15 @@
-package com.qa.Controllers;
+package com.qa.controllers;
 
 
-import com.qa.controllers.HeroController;
 import com.qa.model.Hero;
 import com.qa.repository.HeroRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -31,30 +29,25 @@ public class HeroControllerTest {
     @Mock
     private HeroRepository repository;
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Test
     public void testGetAllHeroes(){
         List<Hero> heroesList = new ArrayList<>();
         Hero hero = new Hero();
-        hero.setDescription("blah");
-        hero.setHeroName("blah");
+        hero.setDescription("good guy");
+        hero.setHeroName("hero");
         hero.setIssueOne("#1");
         heroesList.add(hero);
 
         when(repository.findAll()).thenReturn(heroesList);
 
-        assertEquals(heroController.listAllHeroes().get(0).getHeroName(), "blah");
+        assertEquals(heroController.listAllHeroes().get(0).getHeroName(), "hero");
     }
     @Test
     public void testGetHero(){
 
         Hero hero= new Hero();
-        hero.setDescription("blah");
+        hero.setDescription("okay guy");
         hero.setHeroName("blake");
         hero.setId(3l);
 
@@ -66,7 +59,7 @@ public class HeroControllerTest {
     @Test
     public void testAddHero(){
         Hero hero = new Hero();
-        hero.setDescription("bark");
+        hero.setDescription("director");
         hero.setHeroName("russo");
         hero.setId(1l);
 
@@ -78,16 +71,23 @@ public class HeroControllerTest {
     public void testDeleteHero(){
 
         Hero hero = new Hero();
-        hero.setDescription("bark");
-        hero.setHeroName("ruff");
+        hero.setDescription("best hero");
+        hero.setHeroName("captain cool");
         hero.setId(7l);
-
-
         when(repository.findOne(7l)).thenReturn(hero);
         repository.delete(7l);
         assertEquals( heroController.deleteHero(7l),hero);
+    }
+    @Test
+    public void testUpdateHero(){
 
+        Hero hero= new Hero();
+        hero.setId(1L);
+        hero.setHeroName("IronMan");
+        hero.setDescription("man of fe");
 
+        when(repository.findOne(1L)).thenReturn(hero);
+        assertEquals(heroController.updateHero(1L, hero).getHeroName(), "IronMan");
     }
 
 

@@ -15,8 +15,7 @@ public class Team {
     String description;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
-    Set<Hero> heroes = new HashSet<Hero>();
+
 
     public Team(){
         super();
@@ -67,11 +66,6 @@ public class Team {
         this.description = team.description;
     }
 
-    public Set<Hero> getHero(){
-        return heroes;
-    }
-    public void setHero(Set<Hero> hero){
-     this.heroes =hero;
-    }
+
 
 }

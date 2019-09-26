@@ -1,17 +1,13 @@
-package com.qa.Controllers;
+package com.qa.controllers;
 
 
-import com.qa.controllers.TeamController;
 import com.qa.model.Team;
 import com.qa.repository.TeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -31,17 +27,12 @@ public class TeamControllerTest {
     @Mock
     private TeamRepository repository;
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Test
     public void testGetAllTeams(){
         List<Team> teamsList = new ArrayList<>();
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("female super team");
         team.setTeamName("A-force");
         team.setIssueOne("#1");
         teamsList.add(team);
@@ -55,7 +46,7 @@ public class TeamControllerTest {
     public void testGetTeam(){
 
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("old x-men");
         team.setTeamName("X-men Gold");
         team.setId(3l);
 
@@ -67,7 +58,7 @@ public class TeamControllerTest {
     @Test
     public void testAddTeam(){
         Team team = new Team();
-        team.setDescription("blah");
+        team.setDescription("young x-men");
         team.setTeamName("X-men Blue");
         team.setId(3l);
 
@@ -75,8 +66,32 @@ public class TeamControllerTest {
 
         when(repository.saveAndFlush(team)).thenReturn(team);
         assertEquals(teamController.addTeam(team).getTeamName(),"X-men Blue");
-
     }
+    @Test
+    public void testDeleteTeam(){
+
+        Team team = new Team();
+        team.setDescription("good team");
+        team.setTeamName("super pet squad");
+        team.setId(7l);
+
+
+        when(repository.findOne(7l)).thenReturn(team);
+        repository.delete(7l);
+        assertEquals( teamController.deleteTeam(7l),team);
+    }
+    @Test
+    public void testUpdateTeam(){
+
+        Team team= new Team();
+        team.setId(1L);
+        team.setTeamName("Avengers");
+        team.setDescription("worlds strongest heroes  ");
+
+        when(repository.findOne(1L)).thenReturn(team);
+        assertEquals(teamController.updateTeam(1L, team).getTeamName(), "Avengers");
+    }
+
 
 
 
