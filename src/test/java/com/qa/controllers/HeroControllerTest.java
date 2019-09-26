@@ -29,7 +29,29 @@ public class HeroControllerTest {
     @Mock
     private HeroRepository repository;
 
+    @Test
+    public void testHero(){
+        List<Hero> heroList = new ArrayList<>();
+        Hero hero = new Hero();
+        Hero heroine = new Hero("she-hulk","hulk#51","hulks cousin");
+        hero.setHeroName("iron fist");
+        hero.setIssueOne("defenders#1");
+        hero.setDescription("one punch man");
+        hero.setId(0l);
+        heroine.getHeroName();
+        heroine.getDescription();
+        heroine.getIssueOne();
+        heroine.getId();
+        heroList.add(hero);
+        heroList.add(heroine);
 
+        when(repository.findAll()).thenReturn(heroList);
+
+        assertEquals(heroController.listAllHeroes().get(0).getHeroName(),"iron fist");
+        assertEquals(heroController.listAllHeroes().get(0).getDescription(),"one punch man");
+        assertEquals(heroController.listAllHeroes().get(0).getIssueOne(),"defenders#1");
+
+    }
     @Test
     public void testGetAllHeroes(){
         List<Hero> heroesList = new ArrayList<>();

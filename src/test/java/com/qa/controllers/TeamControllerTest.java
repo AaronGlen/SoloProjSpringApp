@@ -27,6 +27,28 @@ public class TeamControllerTest {
     @Mock
     private TeamRepository repository;
 
+    @Test
+    public void testTeam(){
+        List<Team> teamsList = new ArrayList<>();
+        Team team = new Team();
+        Team team2 = new Team("a-force","a-force#1","all female team");
+        team.setTeamName("avengers");
+        team.setIssueOne("avengers#1");
+        team.setDescription("worlds mightiest heroes");
+        team.setId(0l);
+        team2.getTeamName();
+        team2.getDescription();
+        team2.getIssueOne();
+        team2.getId();
+        teamsList.add(team);
+        teamsList.add(team2);
+
+        when(repository.findAll()).thenReturn(teamsList);
+
+        assertEquals(teamController.listAllTeams().get(0).getTeamName(),"avengers");
+        assertEquals(teamController.listAllTeams().get(0).getDescription(),"worlds mightiest heroes");
+        assertEquals(teamController.listAllTeams().get(0).getIssueOne(),"avengers#1");
+    }
 
     @Test
     public void testGetAllTeams(){
